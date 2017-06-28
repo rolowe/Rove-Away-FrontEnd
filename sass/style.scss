@@ -1,18 +1,97 @@
-$font-stack:    Helvetica, sans-serif;
-$primary-color: #333;
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+
+$primary-font:        'Lato', Arial, sans-serif;
+$primary-blue:        #13b5db;
+$transparent-blue:    rgba(19,181,219,0.9);
+
+// Mixins
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+
+
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  background: url('../img/bg.jpg') #FFF no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
 body {
-  background: lime;
+  font-family: $primary-font;
+  font-weight: 300;
+
+  -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.flexbox-container {
+  height: 100vh;
+
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+
+	align-items: center;
+}
+
+section {
+  width: 100%;
+  background: $transparent-blue;
+  padding: 30px;
+  overflow: hidden;
+}
+
+
+.logo {
+  max-width: 400px;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
 }
 
 
 //@import "common/global";
 
-// @mixin border-radius($radius) {
-//   -webkit-border-radius: $radius;
-//      -moz-border-radius: $radius;
-//       -ms-border-radius: $radius;
-//           border-radius: $radius;
-// }
-//
-// .box { @include border-radius(10px); }
+
+
+// Form UI elements
+
+input,
+select {
+  height: 30px;
+  max-width: 100%;
+  padding: 4px 6px;
+  border: 1px solid #E5E5E5;
+  background: #fff;
+  color: #666;
+  -webkit-transition: all .2s linear;
+  -webkit-transition-property: border,background,color,box-shadow,padding;
+  transition: all .2s linear;
+  transition-property: border,background,color,box-shadow,padding;
+
+  @include border-radius(4px);
+}
+
+input:focus,
+select:focus {
+  border-color: #99baca;
+  outline: 0;
+  background: #f5fbfe; 
+  color: #666;
+}

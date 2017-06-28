@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/rolowe/Rove-Away-FrontEnd/issues"
   },
-  "homepage": "https://github.com/rolowe/Rove-Away-FrontEnd#readme"
+  "homepage": "https://github.com/rolowe/Rove-Away-FrontEnd#readme",
+  "dependencies": {
+    "flexboxgrid": "^6.3.1"
+  }
 }
