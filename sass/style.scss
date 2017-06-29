@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
 
 $primary-font:        'Lato', Arial, sans-serif;
+
 $primary-blue:        #13b5db;
 $transparent-blue:    rgba(19,181,219,0.9);
+
+$primary-red:         #ff5d5f;
+$secondary-red:         #e94b4d;
+
 
 // Mixins
 @mixin border-radius($radius) {
@@ -31,6 +36,7 @@ html {
 body {
   font-family: $primary-font;
   font-weight: 300;
+  font-size: 16px;
 
   -webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -50,11 +56,32 @@ body {
 	align-items: center;
 }
 
+.container {
+  max-width: 1200px;
+  width: 100%;
+  overflow: hidden;
+}
+
 section {
   width: 100%;
   background: $transparent-blue;
   padding: 30px;
   overflow: hidden;
+  margin-bottom: 40px;
+}
+
+form {
+  padding: 40px 0 10px;
+
+  span {
+    color: #FFF;
+    font-size: 14px;
+  }
+
+}
+
+.col-xs {
+  padding: 0 20px;
 }
 
 
@@ -74,24 +101,53 @@ section {
 
 input,
 select {
-  height: 30px;
-  max-width: 100%;
-  padding: 4px 6px;
+  display: inline-block;
+  width: 90%;
+  min-width: 160px;
+  padding: 0 6px;
+  height: 40px;
   border: 1px solid #E5E5E5;
   background: #fff;
   color: #666;
+  margin-bottom: 5px;
+
+  font-size: 14px;
+  font-family: $primary-font;
+
   -webkit-transition: all .2s linear;
   -webkit-transition-property: border,background,color,box-shadow,padding;
   transition: all .2s linear;
   transition-property: border,background,color,box-shadow,padding;
 
-  @include border-radius(4px);
+  @include border-radius(2px);
 }
 
 input:focus,
 select:focus {
   border-color: #99baca;
   outline: 0;
-  background: #f5fbfe; 
+  background: #f5fbfe;
   color: #666;
+}
+
+.btn {
+  display: block;
+  clear: both;
+  margin: 20px auto 0;
+  padding: 10px 25px;
+  background: $primary-red;
+  color: #FFF;
+  border: none;
+
+  font-size: 1rem;
+  font-family: $primary-font;
+  text-decoration: none;
+  text-align: center;
+  transition: all .2s linear;
+
+  &:hover {
+    background: $secondary-red;
+    cursor: pointer;
+  }
+
 }

@@ -4,21 +4,26 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>Rove Away | Travel planning on your terms</title>
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="icon" href="img/favicon.ico">
+  <link rel="icon" href="img/favicon.ico">
+
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+  <link rel="stylesheet" href="css/flexboxgrid.min.css" type="text/css">
 </head>
 
 <body>
 
   <div class="flexbox-container">
     <section>
+
+      <div class="container">
+
       <img src="img/rove-away.png" alt="Rove Away. Travel Planning on your terms." class="logo">
 
       <form action="#" method="POST" id="cache_flights">
 
         <div class="row">
 
-          <div class="col-xs-2">
+          <div class="col-xs">
             <select id="iata" name="iata" class="ui search dropdown">
               <option value="">Select Airport</option>
               <option value="LHR">London Heathrow</option>
@@ -27,17 +32,17 @@
             </select>
           </div>
 
-          <div class="col-xs-2">
+          <div class="col-xs">
             <input type="date" id="dep_date" name="dep_date" class="datepicker fieldset__input  picker__input" placeholder="Leaving?">
             <span>(or leave blank for any date)</span>
           </div>
 
-          <div class="col-xs-2">
+          <div class="col-xs">
             <input type="date" id="ret_date" name="ret_date" class="datepicker fieldset__input  picker__input" placeholder="Coming home?">
             <span>(or leave blank to not specify)</span>
           </div>
 
-          <div class="col-xs-2">
+          <div class="col-xs">
             <select id="ppl" name="ppl" class="ui search dropdown">
               <option value="">How many?</option>
               <option value="1">1</option>
@@ -59,6 +64,8 @@
 
         <button type="submit" class="btn">Rove</button>
       </form>
+
+      </div>
 
     </section>
   </div>

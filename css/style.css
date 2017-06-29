@@ -13,6 +13,7 @@ html {
 body {
   font-family: "Lato", Arial, sans-serif;
   font-weight: 300;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
@@ -26,11 +27,26 @@ body {
   -webkit-box-align: center;
   align-items: center; }
 
+.container {
+  max-width: 1200px;
+  width: 100%;
+  overflow: hidden; }
+
 section {
   width: 100%;
   background: rgba(19, 181, 219, 0.9);
   padding: 30px;
-  overflow: hidden; }
+  overflow: hidden;
+  margin-bottom: 40px; }
+
+form {
+  padding: 40px 0 10px; }
+  form span {
+    color: #FFF;
+    font-size: 14px; }
+
+.col-xs {
+  padding: 0 20px; }
 
 .logo {
   max-width: 400px;
@@ -40,20 +56,25 @@ section {
 
 input,
 select {
-  height: 30px;
-  max-width: 100%;
-  padding: 4px 6px;
+  display: inline-block;
+  width: 90%;
+  min-width: 160px;
+  padding: 0 6px;
+  height: 40px;
   border: 1px solid #E5E5E5;
   background: #fff;
   color: #666;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-family: "Lato", Arial, sans-serif;
   -webkit-transition: all .2s linear;
   -webkit-transition-property: border,background,color,box-shadow,padding;
   transition: all .2s linear;
   transition-property: border,background,color,box-shadow,padding;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px; }
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  border-radius: 2px; }
 
 input:focus,
 select:focus {
@@ -61,3 +82,20 @@ select:focus {
   outline: 0;
   background: #f5fbfe;
   color: #666; }
+
+.btn {
+  display: block;
+  clear: both;
+  margin: 20px auto 0;
+  padding: 10px 25px;
+  background: #ff5d5f;
+  color: #FFF;
+  border: none;
+  font-size: 1rem;
+  font-family: "Lato", Arial, sans-serif;
+  text-decoration: none;
+  text-align: center;
+  transition: all .2s linear; }
+  .btn:hover {
+    background: #e94b4d;
+    cursor: pointer; }
