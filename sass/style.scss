@@ -26,7 +26,7 @@ $secondary-red:         #e94b4d;
 }
 
 html {
-  background: url('../img/bg.jpg') #FFF no-repeat center center fixed;
+  background: url('../img/bg.jpg') $primary-blue no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -101,6 +101,10 @@ form {
 
 input,
 select {
+  -webkit-appearance: none;
+ -moz-appearance: none;
+ appearance: none;
+
   display: inline-block;
   width: 90%;
   min-width: 160px;
@@ -109,7 +113,7 @@ select {
   border: 1px solid #E5E5E5;
   background: #fff;
   color: #666;
-  margin-bottom: 5px;
+  margin: 0 0 5px;
 
   font-size: 14px;
   font-family: $primary-font;
@@ -120,6 +124,10 @@ select {
   transition-property: border,background,color,box-shadow,padding;
 
   @include border-radius(2px);
+}
+
+select {
+  min-width: 200px;
 }
 
 input:focus,
@@ -134,7 +142,7 @@ select:focus {
   display: block;
   clear: both;
   margin: 20px auto 0;
-  padding: 10px 25px;
+  padding: 12px 30px;
   background: $primary-red;
   color: #FFF;
   border: none;
@@ -150,4 +158,66 @@ select:focus {
     cursor: pointer;
   }
 
+}
+
+
+// Footer
+footer {
+  z-index: 2;
+  display: block;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  padding: 5px 0;
+
+  background: rgba(57,57,57,0.9);
+
+  ul {
+    overflow: hidden;
+    max-width: 250px;
+
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+
+    li {
+      list-style: none;
+      display: block;
+      float: left;
+      margin: 0 10px;
+      font-size: 13px;
+
+      a {
+        color: #FFF;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .social {
+        display: block;
+        width: 17px;
+        height: 17px;
+        text-indent: -99999em;
+        overflow: hidden;
+        background-position: center center;
+        background-repeat: no-repeat;
+      }
+      .facebook {
+        background-image: url(../img/icons/facebook.png);
+      }
+      .instagram {
+        background-image: url(../img/icons/instagram.png);
+      }
+      .twitter {
+        background-image: url(../img/icons/twitter.png);
+      }
+
+
+    }
+
+  }
 }
