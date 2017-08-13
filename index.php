@@ -6,8 +6,12 @@
 	<title>Rove Away | Travel planning on your terms</title>
   <link rel="icon" href="img/favicon.ico">
 
-	<link rel="stylesheet" href="css/style.css" type="text/css">
-  <link rel="stylesheet" href="css/flexboxgrid.min.css" type="text/css">
+  <link rel="stylesheet" href="assets/css/lib/flexboxgrid/flexboxgrid.min.css" type="text/css">
+
+	<link rel="stylesheet" type="text/css" href="assets/css/lib/datepicker/default.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/lib/datepicker/default.date.css">
+
+	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
 </head>
 
 <body>
@@ -17,7 +21,7 @@
 
       <div class="container">
 
-      <img src="img/rove-away.png" alt="Rove Away. Travel Planning on your terms." class="logo">
+      <img src="assets/img/rove-away.png" alt="Rove Away. Travel Planning on your terms." class="logo">
 
       <form action="#" method="POST" id="cache_flights">
 
@@ -82,6 +86,11 @@
 
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+	<script src="assets/js/lib/picker.js"></script>
+	<script src="assets/js/lib/picker.date.js"></script>
+
+	<script src="assets/js/form_elements.js"></script>
 	<!-- <script src="js/main.js"></script> -->
 </body>
 
