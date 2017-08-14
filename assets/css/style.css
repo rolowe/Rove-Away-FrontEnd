@@ -60,7 +60,7 @@ select {
   -moz-appearance: none;
   appearance: none;
   display: inline-block;
-  width: 90%;
+  width: 100%;
   min-width: 160px;
   padding: 0 6px;
   height: 40px;

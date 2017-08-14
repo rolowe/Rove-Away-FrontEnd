@@ -23,17 +23,23 @@
 
       <img src="assets/img/rove-away.png" alt="Rove Away. Travel Planning on your terms." class="logo">
 
-      <form action="#" method="POST" id="cache_flights">
+      <form action="results.php" method="POST" id="cache_flights">
 
         <div class="row">
 
           <div class="col-xs">
-            <select id="iata" name="iata" class="ui search dropdown">
+            <!-- <select id="iata" name="iata" class="ui search dropdown">
               <option value="">Select Airport</option>
+							<option value="LOND">All London</option>
               <option value="LHR">London Heathrow</option>
               <option value="LGW">London Gatwick</option>
               <option value="BRS">Bristol</option>
-            </select>
+            </select> -->
+
+						<input type="text" id="airport-search" name="iata" list="json-datalist" placeholder="Leaving from...">
+			      <datalist id="json-datalist">
+							<select></select>
+						</datalist>
           </div>
 
           <div class="col-xs">
@@ -91,6 +97,9 @@
 	<script src="assets/js/lib/picker.date.js"></script>
 
 	<script src="assets/js/form_elements.js"></script>
+	<script src="assets/js/search_airports.js"></script>
+	<script src="assets/js/lib/datalist.polyfill.min.js"></script>
+
 	<!-- <script src="js/main.js"></script> -->
 </body>
 
