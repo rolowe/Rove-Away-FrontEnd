@@ -1,51 +1,48 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Rove Away - Cached Results</title>
-  </head>
+<?php
+  include "config/config.php";
 
-  <body>
+	$page_title = "Results travelling " .$_POST['dep_date']. " | Rove Away";
+	include "templates/_head.php";
+?>
 
+<body>
+
+  <?php include "templates/header.php"; ?>
+
+  <section class="results-search">
+    <div class="container">
+      <img src="assets/img/rove-away.png" alt="Rove Away. Travel Planning on your terms." class="logo">
+      <?php include "templates/forms/search.php"; ?>
+    </div>
+  </section>
 
     <div class="container">
 
-      <h1>Rove Away</h1>
-
-      <button class="ui button right">
-        <a href="index.php">Try again</a>
-      </button>
-
     <?php
-        include "config/config.php";
-
         // 1. GET Form Values
-          // 1.1 IATA - AIRPORT CODE
-          $iata = (isset($_POST['iata']) && preg_match('/^[A-Z]{3}$/', $_POST['iata'])) ? $_POST['iata'].'-iata' : 'anywhere';
+        // 1.1 IATA - AIRPORT CODE
+        $iata = (isset($_POST['iata']) && preg_match('/^[A-Z]{3}$/', $_POST['iata'])) ? $_POST['iata'].'-iata' : 'anywhere';
 
-          // 1.2 DEPARTURE DATE
-          if ( isset($_POST['dep_date']) ) {
-            $dep_date = str_replace("/", "-", $_POST['dep_date']);
-          } else {
-            $dep_date = 'anytime';
-          }
+        // 1.2 DEPARTURE DATE
+        if ( isset($_POST['dep_date']) ) {
+          $dep_date = str_replace("/", "-", $_POST['dep_date']);
+        } else {
+          $dep_date = 'anytime';
+        }
 
-          // 1.3 RETURNING DATE
-          if ( isset($_POST['ret_date']) ) {
-            $ret_date = str_replace("/", "-", $_POST['ret_date']);
-          } else {
-            $ret_date = "";
-          }
+        // 1.3 RETURNING DATE
+        if ( isset($_POST['ret_date']) ) {
+          $ret_date = str_replace("/", "-", $_POST['ret_date']);
+        } else {
+          $ret_date = "";
+        }
 
-          // 1.4 NO OF PEOPLE
-          if ( isset($_POST['ppl']) ) {
-            $ppl = str_replace("/", "-", $_POST['ppl']);
-          } else {
-            $ppl = "1";
-          }
-
+        // 1.4 NO OF PEOPLE
+        if ( isset($_POST['ppl']) ) {
+          $ppl = str_replace("/", "-", $_POST['ppl']);
+        } else {
+          $ppl = "1";
+        }
 
         // 2. URL
         $sUri = "{$sk_browser_url}{$iata}/anywhere/{$dep_date}/{$ret_date}?apikey={$sk_api_key}";
@@ -94,67 +91,54 @@
 
     ?>
 
-    <h2>
-      Travelling from <?=$sDest;?> to anywhere, leaving <?=date('M jS, Y', strtotime($dep_date)); ?>
-      <?php if ($ret_date != "") { ?>
-        , returning <?=date('M jS, Y', strtotime($ret_date)); ?>
-      <?php } ?>
-    </h2>
 
-    <table class="ui celled striped table">
-      <thead>
-        <tr>
-          <th>Destination</th>
-          <th>Departing</th>
-          <?php if ($ret_date != "") { ?>
-            <th>Returning</th>
-          <?php } ?>
-          <th>Price from <i>(per person)</i></th>
-          <th>Carrier</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
 
         <?php foreach ($oResult->Quotes AS $oQuote): ?>
 
-          <tr>
-            <td class="collapsing">
-              <small><?=$sDest; ?> to</small><br>
-              <?=$aoPlace[$oQuote->OutboundLeg->DestinationId]->Name; ?>
-            </td>
-            <td>
-              <?=date('M jS, Y', strtotime($oQuote->OutboundLeg->DepartureDate)); ?>
-            </td>
-            <?php if ($ret_date != "") { ?>
-              <td>
-                <?=date('M jS, Y', strtotime($oQuote->InboundLeg->DepartureDate)); ?>
-              </td>
-            <?php } ?>
-            <td>
-              £<?=$oQuote->MinPrice;?>
-            </td>
-            <td class="collapsing">
+          <div class="results-item">
+
+            <span class="fly-from"><?=$sDest; ?></span>
+            <small>to</small>
+            <h3><?=$aoPlace[$oQuote->OutboundLeg->DestinationId]->Name; ?></h3>
+
+            <div class="dates">
+              <span class="date">
+                <?=date('M jS, Y', strtotime($oQuote->OutboundLeg->DepartureDate)); ?>
+              </span>
+              <?php if ($ret_date != "") { ?>
+                  <span class="date">
+                    <?=date('M jS, Y', strtotime($oQuote->InboundLeg->DepartureDate)); ?>
+                  </span>
+              <?php } ?>
+            </div>
+
+            <div class="price">
+              <small>From </small>
+              <h4>£<?=$oQuote->MinPrice;?><small>pp</small></h4>
+            </div>
+
+
+            <div class="flying-with">
+              <small>Flying with</small><br>
               <?php foreach ($oQuote->OutboundLeg->CarrierIds AS $iCarrier): ?>
-                  <?=$aoCarrier[$iCarrier]->Name; ?><br>
+                  <?php
+                  if($aoCarrier[$iCarrier]->Name != "") {
+                    echo $aoCarrier[$iCarrier]->Name;
+                  } else {
+                    echo "Multiple Airlines";
+                  }
+                  ?>
               <?php endforeach; ?>
-            </td>
-            <td>
-              <a href="functions/start-live-session.php?originplace=<?= $iata; ?>&destinationplace=<?= $aoPlace[$oQuote->OutboundLeg->DestinationId]->IataCode; ?>&outbounddate=<?= $dep_date; ?>">More info</a>
-            </td>
-          </tr>
+            </div>
+
+            <a href="functions/start-live-session.php?originplace=<?= $iata; ?>&destinationplace=<?= $aoPlace[$oQuote->OutboundLeg->DestinationId]->IataCode; ?>&outbounddate=<?= $dep_date; ?>" class="btn">More info</a>
+
+          </div>
+
         <?php endforeach; ?>
-
-      </tbody>
-    </table>
-
-
 
   </div>
 
+  <?php include "templates/footer.php"; ?>
 
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-
-  </body>
-
-</html>
+  <?php include "templates/_footer.php"; ?>
