@@ -69,6 +69,7 @@ h4 {
   max-width: 1200px;
   width: 100%;
   overflow: hidden;
+  margin: 0 auto;
 }
 
 section {
@@ -88,11 +89,6 @@ form {
   }
 
 }
-
-.col-xs {
-  padding: 0 20px;
-}
-
 
 .logo {
   max-width: 400px;
@@ -207,27 +203,37 @@ select:focus {
 
 // Grid layout
 
-.row {
-  width: 100%;
-  overflow: hidden;
-
-  .col-2 {
-    width: 46%;
-    margin: 0 2%;
-    float: left;
-  }
-  .col-3 {
-    width: 29.3%;
-    margin: 0 2%;
-    float: left;
-  }
-  .col-4 {
-    width: 21%;
-    margin: 0 2%;
-    float: left;
-  }
-
+.col-1 {
+  width: 96%;
+  margin: 0 2%;
+  float: none;
 }
+.col-2 {
+  width: 46%;
+  margin: 0 2%;
+  float: left;
+}
+.col-3 {
+  width: 29.3%;
+  margin: 0 2%;
+  float: left;
+}
+.col-4 {
+  width: 21%;
+  margin: 0 2%;
+  float: left;
+}
+.col-5 {
+  width: 18%;
+  margin: 0 1%;
+  float: left;
+}
+.col-6 {
+  width: 14.6%;
+  margin: 0 1%;
+  float: left;
+}
+
 
 
 
@@ -336,12 +342,10 @@ footer {
   font-size: 14px;
 
   float: left;
-  width: 29.3%;
-  margin: 2%;
   padding: 20px 0;
+  margin: 2%;
 
   h3 {
-    min-block-size: 50px;
   }
 
   span.fly-from {

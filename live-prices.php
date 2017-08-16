@@ -1,37 +1,30 @@
 <?php
   session_start();
   include "config/config.php";
+
+  $page_title = "Live Prices | Rove Away";
+	include "templates/_head.php";
 ?>
 
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Rove Away - Prototype</title>
-  </head>
 
   <body>
 
+    <?php include "templates/header.php"; ?>
+
+    <section class="results-search">
+      <div class="container">
+        <img src="assets/img/rove-away.png" alt="Rove Away. Travel Planning on your terms." class="logo">
+        <?php include "templates/forms/search.php"; ?>
+      </div>
+    </section>
 
 
-        <div class="container">
 
-          <h1>Rove Away</h1>
-
-          <button class="ui button right">
-            <a href="index.php">Start again</a>
-          </button>
-
+    <div class="container">
 
     <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
-    $session_key = preg_replace('/\s+/', '', $_SESSION['livesession']);
-    $livepriceURL = "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/" . $session_key;
+      $session_key = preg_replace('/\s+/', '', $_SESSION['livesession']);
+      $livepriceURL = "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/" . $session_key;
 
 
       // 1. Query
@@ -83,114 +76,101 @@
   ?>
 
 
-
-    <table class="ui celled striped table">
-      <!-- <thead>
-        <tr>
-          <th>Departing</th>
-          <th>Arriving</th>
-          <th>Flight time</th>
-          <th>Stops</th>
-          <th>Flying with</th>
-          <th>Pricing options</th>
-        </tr>
-      </thead> -->
-      <tbody>
-
     <?php foreach ($oResult->Itineraries as $Itinerary): ?>
 
-      <tr>
-        <td>
+        <div class="results-item col-1">
 
-        <table>
-          <tr>
-            <td>
                 <?php
                   $ItineryId = $Itinerary->OutboundLegId;
                   $departingFrom = $aoLegs[$ItineryId]->OriginStation;
                   $arrivingTo = $aoLegs[$ItineryId]->DestinationStation;
                   $carrierId = $aoLegs[$ItineryId]->Carriers[0];
                 ?>
-                <?= $aoPlace[$departingFrom]->Name; ?><br>
-                <?php echo date('D j F, Y, g:i a',strtotime( $aoLegs[$ItineryId]->Departure )); ?>
-            </td>
-            <td>
-                <?= $aoPlace[$arrivingTo]->Name; ?><br>
-                <?php echo date('D j F, Y, g:i a',strtotime( $aoLegs[$ItineryId]->Arrival )); ?>
-            </td>
-            <td>
-                <?= $aoLegs[$ItineryId]->Duration; ?> mins
-            </td>
-            <td>
-                <?php
-                  $stopNo = count($aoLegs[$ItineryId]->Stops);
-                  if ($stopNo > 0) {
-                    echo $stopNo . " stop<br />";
-                    foreach ( $aoLegs[$ItineryId]->Stops as $Stop ) {
-                      echo $aoPlace[$Stop]->Name;
+
+                <div class="col-6">
+                  <h3><?= $aoPlace[$departingFrom]->Name; ?></h3>
+                    <?php echo date('D j F, Y, g:i a',strtotime( $aoLegs[$ItineryId]->Departure )); ?>
+                </div>
+
+                <div class="col-6">
+                  <h3><?= $aoPlace[$arrivingTo]->Name; ?></h3>
+                    <?php echo date('D j F, Y',strtotime( $aoLegs[$ItineryId]->Arrival )); ?><br>
+                    <?php echo date('g:i a',strtotime( $aoLegs[$ItineryId]->Arrival )); ?>
+                </div>
+
+                <div class="col-6">
+                  <br>
+                  <?php echo convertToHoursMins($aoLegs[$ItineryId]->Duration, '%02d hours %02d mins'); ?>
+                  <br>
+                  <?php
+                    $stopNo = count($aoLegs[$ItineryId]->Stops);
+                    if ($stopNo > 0) {
+                      echo $stopNo . " stop<br />";
+                      foreach ( $aoLegs[$ItineryId]->Stops as $Stop ) {
+                        echo "<small>" . $aoPlace[$Stop]->Name . "</small><br>";
+                      }
+                    } else {
+                      echo "Direct";
                     }
-                  } else {
-                    echo "Direct";
-                  }
-                ?>
-            </td>
-            <td>
-                <img src="<?= $aoCarrier[$carrierId]->ImageUrl ?>" title="<?= $aoCarrier[$carrierId]->ImageUrl ?>" width="80" />
-            </td>
-          </tr>
-        </table>
+                  ?>
+                </div>
 
-      </td>
-      </tr>
+                <div class="col-6">
+                  <small>Flying with</small><br>
+                  <img src="<?= $aoCarrier[$carrierId]->ImageUrl ?>" title="<?= $aoCarrier[$carrierId]->ImageUrl ?>" width="80" />
+                </div>
 
-      <tr>
-        <td>
 
-          <table>
-            <tr>
 
-            <?php foreach ($Itinerary->PricingOptions as $PricingOption) : ?>
-              <td>
+                  <?php
+                    $count = 0;
+                    foreach ($Itinerary->PricingOptions as $PricingOption) :
+                      $count++;
 
-                <table>
-                  <tr>
-                    <td>
-                      <h4>£<?= $PricingOption->Price; ?></h4>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
+                    ?>
+
+                      <div class="col-6">
+                        <?php if($count == 1) { ?>
+                        <br>
+                        <h4>£<?= $PricingOption->Price; ?></h4>
+                      </div>
+
                       <?php $AgentId = $PricingOption->Agents[0]; ?>
-                      <img src="<?=$aoAgents[$AgentId]->ImageUrl; ?>" title="" width="80" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="<?= $PricingOption->DeeplinkUrl; ?>">Book now</a><br>
-                      <small>via <?=$aoAgents[$AgentId]->Name; ?></small>
-                    </td>
-                  </tr>
-                </table>
 
-              </td>
-            <?php endforeach; ?>
+                      <div class="col-6">
 
-            </tr>
-          </table>
 
-        </td>
-      </tr>
+                          <?php if($count != 1) { ?>
+                            <img src="<?= $aoAgents[$AgentId]->ImageUrl; ?>" title="" width="80" />
+                          <?php } ?>
+
+                          <a href="<?= $PricingOption->DeeplinkUrl; ?>" class="btn">Book now</a><br>
+                          <small>via <?=$aoAgents[$AgentId]->Name; ?></small>
+
+                        <?php } ?>
+                      </div>
+                  <?php endforeach; ?>
+
+
+
+          </div>
 
     <?php endforeach; ?>
 
-      </tbody>
-    </table>
 
 
+    <?php
+      function convertToHoursMins($time, $format = '%02d:%02d') {
+        if ($time < 1) {
+            return;
+        }
+        $hours = floor($time / 60);
+        $minutes = ($time % 60);
+        return sprintf($format, $hours, $minutes);
+      }
+    ?>
 
-    </div>
 
+    <?php include "templates/footer.php"; ?>
 
-</body>
-
-</html>
+    <?php include "templates/_footer.php"; ?>

@@ -95,7 +95,7 @@
 
         <?php foreach ($oResult->Quotes AS $oQuote): ?>
 
-          <div class="results-item">
+          <div class="results-item col-3">
 
             <span class="fly-from"><?=$sDest; ?></span>
             <small>to</small>
