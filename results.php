@@ -1,8 +1,10 @@
 <?php
-  include "config/config.php";
+
 
 	$page_title = "Results travelling " .$_POST['dep_date']. " | Rove Away";
 	include "templates/_head.php";
+
+  include "config/config.php";
 ?>
 
 <body>
@@ -124,6 +126,8 @@
                   <?php
                   if($aoCarrier[$iCarrier]->Name != "") {
                     echo $aoCarrier[$iCarrier]->Name;
+                    // Add Airline to DB
+                    db_add_airline($aoCarrier[$iCarrier]->CarrierId, $aoCarrier[$iCarrier]->Name);
                   } else {
                     echo "Multiple Airlines";
                   }

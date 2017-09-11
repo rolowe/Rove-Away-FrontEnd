@@ -8,7 +8,7 @@
   $outbounddate = $_GET['outbounddate'];
 
   $data = array(
-    'apiKey' => 'de995438234178656329029769192274',
+    'apiKey' => 'ro272479499858557678555613499413',
     'country' => 'GB',
     'currency' => 'GBP',
     'locale' => 'en-GB',
@@ -30,7 +30,7 @@
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
   $response = curl_exec($ch);
   curl_close($ch);
-  //print_r( $response );
+  print_r( $response );
 
   $headers = explode("\n", $response);
   foreach($headers as $header) {
@@ -42,7 +42,7 @@
             if ( !empty($session_key) ) {
               session_start();
               $_SESSION['livesession'] = $session_key;
-              //echo "Session Key: " . $_SESSION['livesession'];
+              echo "Session Key: " . $_SESSION['livesession'];
               header("Location:/live-prices.php");
             }
           exit;

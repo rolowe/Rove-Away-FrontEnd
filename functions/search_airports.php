@@ -28,6 +28,6 @@
 
   ?>
 
-    <option value="<?php echo substr($Airport->PlaceId, 0, -4); ?>"><?php echo $Airport->PlaceName; ?> (<?php echo $Airport->CountryName; ?>)</option>
+    <option value="<?php echo $Airport->PlaceId; ?>"><?php echo $Airport->PlaceName; ?> (<?php echo $Airport->CountryName; ?>)</option>
 
   <?php } ?>
