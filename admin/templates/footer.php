@@ -1,8 +1,8 @@
-	
+
 	<!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            &copy; Rove Away | Travel planning on your terms
           </div>
           <div class="clearfix"></div>
         </footer>

@@ -13,7 +13,7 @@
 
         <div class="page-title">
           <div class="title_left">
-            <h3>Airlines</h3>
+            <h3>Locations</h3>
           </div>
         </div>
 
@@ -22,7 +22,6 @@
 						if(isset( $_GET["status"]) ) {
 								if( ($_GET["status"]) == "success") {
 					?>
-
 
 					<div class="alert alert-success alert-dismissible fade in" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
@@ -36,7 +35,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Recorded Carriers</h2>
+                    <h2>Recorded Destinations</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li>
                       	<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -54,16 +53,19 @@
                       <table class="table table-striped jambo_table bulk_action">
                         <thead>
                           <tr class="headings">
-                            <th class="column-title">Carrier ID </th>
-                            <th class="column-title">Carrier Nme </th>
-                            <th class="column-title">Category </th>
+                            <th class="column-title">Location ID </th>
+                            <th class="column-title">Location Nme </th>
+                            <th class="column-title">Holiday Type 1 </th>
+                            <th class="column-title">Holiday Type 2 </th>
+                            <th class="column-title">Activity Type 1 </th>
+                            <th class="column-title">Activity Type 2 </th>
                             <th class="column-title no-link last"><span class="nobr">Action</span>
                             </th>
                           </tr>
                         </thead>
 
                         <tbody>
-                          <?php get_airline_data(); ?>
+                          <?php get_location_data(); ?>
                         </tbody>
                       </table>
                     </div>

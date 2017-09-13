@@ -103,6 +103,8 @@
             <small>to</small>
             <h3><?=$aoPlace[$oQuote->OutboundLeg->DestinationId]->Name; ?></h3>
 
+            <?php db_add_location($aoPlace[$oQuote->OutboundLeg->DestinationId]->PlaceId, $aoPlace[$oQuote->OutboundLeg->DestinationId]->Name); ?>
+
             <div class="dates">
               <span class="date">
                 <?=date('M jS, Y', strtotime($oQuote->OutboundLeg->DepartureDate)); ?>

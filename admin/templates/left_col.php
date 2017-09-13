@@ -24,8 +24,8 @@
               <div class="menu_section">
 
                 <ul class="nav side-menu">
-                  <li class="active"><a><i class="fa fa-plane"></i> Airlines </a></li>
-                  <li><a><i class="fa fa-map-marker"></i> Locations </a></li>
+                  <li><a href="/admin/airlines"><i class="fa fa-plane"></i> Airlines </a></li>
+                  <li><a href="/admin/locations"><i class="fa fa-map-marker"></i> Locations </a></li>
                 </ul>
               </div>
 
